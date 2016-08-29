@@ -52,6 +52,7 @@ class BoardView: UIView, UINavigationControllerDelegate, UIImagePickerController
     
     func setup(){
         view = loadViewFromNib()
+        print("tri dep trai")
         view.frame = bounds
         view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
