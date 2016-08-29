@@ -26,6 +26,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var ArrayData = Array<Int>()
     
+    var duplicateArray = Array<String>()
     
     
     @IBOutlet var vSetting: UIView!
@@ -1310,6 +1311,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBAction func ClickToPlay(sender: AnyObject) {
         clickOfPlay += 1
         if clickOfPlay == 1{
+            duplicateArray = NSArray(array:gobal.ArrayList, copyItems: true) as! Array<String>
+            if ArrayData.count<4{
+                clickOfPlay = 0
+                let alert = UIAlertController(title: "Fail", message: "You must choose number of cards  greater than or equal four ", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
             self.setBoardView()
             self.clvCharacter.hidden = true
             playMusic("Tap.wav")
@@ -1317,6 +1326,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             if let viewWithTag = self.view.viewWithTag(9999) {
                 viewWithTag.removeFromSuperview()
             }
+            gobal.ArrayList.removeAll()
+            gobal.ArrayList = NSArray(array:duplicateArray, copyItems: true) as! Array<String>
             clickOfPlay = 0
             playMusic("Tap.wav")
             timerCount = ""
